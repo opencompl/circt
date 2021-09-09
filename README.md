@@ -1,58 +1,12 @@
-<p align="center"><img src="docs/includes/img/circt-logo.svg"/></p>
+# Verification Dialect and Tools
+(branch: verification; check branch main for the actual project)
 
 [![](https://github.com/llvm/circt/workflows/Build%20and%20Test/badge.svg?event=push)](https://github.com/llvm/circt/actions?query=workflow%3A%22Build+and+Test%22)
 [![Nightly integration tests](https://github.com/llvm/circt/workflows/Nightly%20integration%20tests/badge.svg)](https://github.com/llvm/circt/actions?query=workflow%3A%22Nightly+integration+tests%22)
 
-# ⚡️ "CIRCT" / Circuit IR Compilers and Tools
-
-"CIRCT" stands for "Circuit IR Compilers and Tools".  One might also interpret
-it as the recursively as "CIRCT IR Compiler and Tools".  The T can be
-selectively expanded as Tool, Translator, Team, Technology, Target, Tree, Type,
-... we're ok with the ambiguity.
-
-The CIRCT community is an open and welcoming community.  If you'd like to
-participate, you can do so in a number of different ways:
-
-1) Join our [Discourse Forum](https://llvm.discourse.group/c/Projects-that-want-to-become-official-LLVM-Projects/circt/) 
-on the LLVM Discourse server.  To get a "mailing list" like experience click the 
-bell icon in the upper right and switch to "Watching".  It is also helpful to go 
-to your Discourse profile, then the "emails" tab, and check "Enable mailing list 
-mode".  You can also do chat with us on [CIRCT channel](https://discord.com/channels/636084430946959380/742572728787402763) 
-of LLVM discord server.
-
-2) Join our weekly video chat.  Please see the
-[meeting notes document](https://docs.google.com/document/d/1fOSRdyZR2w75D87yU2Ma9h2-_lEPL4NxvhJGJd-s5pk/edit#)
-for more information.
-
-3) Contribute code.  CIRCT follows all of the LLVM Policies: you can create pull
-requests for the CIRCT repository, and gain commit access using the [standard LLVM policies](https://llvm.org/docs/DeveloperPolicy.html#obtaining-commit-access).
-
-## Motivation
-
-The EDA industry has well-known and widely used proprietary and open source
-tools.  However, these tools are inconsistent, have usability concerns, and were
-not designed together into a common platform.  Furthermore
-these tools are generally built with
-[Verilog](https://en.wikipedia.org/wiki/Verilog) (also
-[VHDL](https://en.wikipedia.org/wiki/VHDL)) as the IRs that they
-interchange.  Verilog has well known design issues, and limitations, e.g.
-suffering from poor location tracking support.
-
-The CIRCT project is an (experimental!) effort looking to apply MLIR and
-the LLVM development methodology to the domain of hardware design tools.  Many
-of us dream of having reusable infrastructure that is modular, uses
-library-based design techniques, is more consistent, and builds on the best
-practices in compiler infrastructure and compiler design techniques.
-
-By working together, we hope that we can build a new center of gravity to draw
-contributions from the small (but enthusiastic!) community of people who work
-on open hardware tooling.  In turn we hope this will propel open tools forward,
-enables new higher-level abstractions for hardware design, and
-perhaps some pieces may even be adopted by proprietary tools in time.
-
-For more information, please see our longer [charter document](docs/Charter.md).
-
 ## Setting this up
+
+Following instructions have been slightly modified to accommodate the verification dialect.
 
 These commands can be used to setup CIRCT project:
 
@@ -71,6 +25,10 @@ changed.
 $ git clone git@github.com:llvm/circt.git
 $ cd circt
 $ git submodule init
+```
+
+2.1) If you wish to build `llvm` from the submodule, do the following:
+```
 $ git submodule update
 ```
 
@@ -84,7 +42,7 @@ $ cd llvm
 $ git fetch --unshallow
 ```
 
-3) **Build and test LLVM/MLIR:**
+**Build and test LLVM/MLIR:**
 
 ```
 $ cd circt
@@ -98,6 +56,11 @@ $ cmake -G Ninja ../llvm \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 $ ninja
 $ ninja check-mlir
+```
+
+3) **Build smt-dialect**
+```
+git submodule update smt-dialect
 ```
 
 4) **Build and test CIRCT:**

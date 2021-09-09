@@ -2,3 +2,6 @@
 	path = llvm
 	url = ../../circt/llvm.git
 	shallow = true
+[submodule "smt-dialect"]
+	path = smt-dialect
+	url = git@github.com:opencompl/smt-dialect.git
