@@ -105,6 +105,9 @@ if (MSVC_IDE OR XCODE)
 endif()
 set(LLVM_LIT_ARGS "${LIT_ARGS_DEFAULT}" CACHE STRING "Default options for lit")
 
+# Add SMT Dialect 
+add_subdirectory(smt-dialect)
+
 #-------------------------------------------------------------------------------
 # CIRCT configuration
 #-------------------------------------------------------------------------------
@@ -136,6 +139,9 @@ include_directories(${MLIR_INCLUDE_DIRS})
 # Add CIRCT files to the include path
 include_directories(${CIRCT_MAIN_INCLUDE_DIR})
 include_directories(${CIRCT_INCLUDE_DIR})
+
+# Add SMT dialect include paths
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/smt-dialect/include)
 
 #-------------------------------------------------------------------------------
 # Verilator Configuration
