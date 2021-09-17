@@ -105,9 +105,6 @@ if (MSVC_IDE OR XCODE)
 endif()
 set(LLVM_LIT_ARGS "${LIT_ARGS_DEFAULT}" CACHE STRING "Default options for lit")
 
-# Add SMT Dialect 
-add_subdirectory(smt-dialect)
-
 #-------------------------------------------------------------------------------
 # CIRCT configuration
 #-------------------------------------------------------------------------------
@@ -140,7 +137,20 @@ include_directories(${MLIR_INCLUDE_DIRS})
 include_directories(${CIRCT_MAIN_INCLUDE_DIR})
 include_directories(${CIRCT_INCLUDE_DIR})
 
-# Add SMT dialect include paths
+# Add SMT dialect and include paths
+
+### VERY BAD FIX: Alias add_mlir_dialect_library to add_circt_dialect_library
+### creating a dummy function to avoid polluting the global scope definition.
+### WHY? Because add_circt_library wraps around the former, but has a few more
+### calls to set up export targets correctly. (check AddCIRCT.cmake)
+function(add_smt_dialect_folder_safe)
+  function(add_mlir_dialect_library)
+    add_circt_dialect_library(${ARGV})
+  endfunction()
+  add_subdirectory(smt-dialect)
+endfunction()
+add_smt_dialect_folder_safe()
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/smt-dialect/include)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/smt-dialect/include)
 
