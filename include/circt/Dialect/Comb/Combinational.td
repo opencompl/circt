@@ -15,6 +15,7 @@
 //===----------------------------------------------------------------------===//
 
 include "mlir/Interfaces/InferTypeOpInterface.td"
+include "SMT/SMTInterfaces.td"
 
 // Base class for binary operators.
 class BinOp<string mnemonic, list<OpTrait> traits = []> :
@@ -62,7 +63,7 @@ class UTVariadicOp<string mnemonic, list<OpTrait> traits = []> :
 }
 
 // Arithmetic and Logical Operations.
-def AddOp : UTVariadicOp<"add", [Commutative]>;
+def AddOp : UTVariadicOp<"add", [Commutative, DeclareOpInterfaceMethods<SMTSerializableOpInterface, ["generateDefinitions"]>]>;
 def MulOp : UTVariadicOp<"mul", [Commutative]>;
 let hasFolder = true in {
   def DivUOp : UTBinOp<"divu">;

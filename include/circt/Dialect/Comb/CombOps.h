@@ -21,6 +21,9 @@
 #include "mlir/Interfaces/InferTypeOpInterface.h"
 #include "mlir/Interfaces/SideEffectInterfaces.h"
 
+// FIXME: [smt] find the right way to do this
+using mlir::SMTSerializableOpInterface;
+
 namespace llvm {
 struct KnownBits;
 }

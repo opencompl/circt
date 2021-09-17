@@ -17,6 +17,7 @@ add_circt_dialect_library(CIRCTComb
   CIRCTHW
   MLIRIR
   MLIRInferTypeOpInterface
+  MLIRSMT
    )
 
 add_dependencies(circt-headers MLIRCombIncGen MLIRCombEnumsIncGen)

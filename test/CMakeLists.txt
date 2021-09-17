@@ -20,6 +20,8 @@ set(CIRCT_TEST_DEPENDS
   firtool
   mlir-opt
   mlir-cpu-runner
+  smt-opt
+  smt-translate
   )
 
 if(CIRCT_LLHD_SIM_ENABLED)

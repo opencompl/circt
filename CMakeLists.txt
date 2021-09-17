@@ -142,6 +142,7 @@ include_directories(${CIRCT_INCLUDE_DIR})
 
 # Add SMT dialect include paths
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/smt-dialect/include)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/smt-dialect/include)
 
 #-------------------------------------------------------------------------------
 # Verilator Configuration

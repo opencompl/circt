@@ -15,6 +15,8 @@
 
 #include "mlir/IR/BuiltinAttributes.h"
 #include "mlir/IR/Dialect.h"
+#include "SMT/SMTInterfaces.h"
+#include "SMT/SMTSerializers.h"
 
 // Pull in the Dialect definition.
 #include "circt/Dialect/Comb/CombDialect.h.inc"
