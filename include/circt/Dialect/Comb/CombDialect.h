@@ -13,10 +13,10 @@
 #ifndef CIRCT_DIALECT_COMB_COMBDIALECT_H
 #define CIRCT_DIALECT_COMB_COMBDIALECT_H
 
-#include "mlir/IR/BuiltinAttributes.h"
-#include "mlir/IR/Dialect.h"
 #include "SMT/SMTInterfaces.h"
 #include "SMT/SMTSerializers.h"
+#include "mlir/IR/BuiltinAttributes.h"
+#include "mlir/IR/Dialect.h"
 
 // Pull in the Dialect definition.
 #include "circt/Dialect/Comb/CombDialect.h.inc"

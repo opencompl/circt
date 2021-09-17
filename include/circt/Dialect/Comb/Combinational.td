@@ -64,7 +64,7 @@ class UTVariadicOp<string mnemonic, list<OpTrait> traits = []> :
 
 // Arithmetic and Logical Operations.
 def AddOp : UTVariadicOp<"add", [Commutative, DeclareOpInterfaceMethods<SMTSerializableOpInterface, ["generateDefinitions"]>]>;
-def MulOp : UTVariadicOp<"mul", [Commutative]>;
+def MulOp : UTVariadicOp<"mul", [Commutative, DeclareOpInterfaceMethods<SMTSerializableOpInterface, ["generateDefinitions"]>]>;
 let hasFolder = true in {
   def DivUOp : UTBinOp<"divu">;
   def DivSOp : UTBinOp<"divs">;
@@ -110,7 +110,8 @@ def ICmpPredicate : I64EnumAttr<
      ICmpPredicateSGT, ICmpPredicateSGE, ICmpPredicateULT, ICmpPredicateULE,
      ICmpPredicateUGT, ICmpPredicateUGE]>;
 
-def ICmpOp : CombOp<"icmp", [NoSideEffect, SameTypeOperands]> {
+def ICmpOp : CombOp<"icmp", [NoSideEffect, SameTypeOperands,
+                             DeclareOpInterfaceMethods<SMTSerializableOpInterface>]> {
   let summary = "Compare two integer values";
   let description = [{
     This operation compares two integers using a predicate.  If the predicate is
