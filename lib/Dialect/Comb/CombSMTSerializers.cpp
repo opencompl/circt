@@ -16,9 +16,7 @@ LogicalResult AddOp::generateDefinitions(mlir::smt::SMTContext &ctx) {
 LogicalResult AddOp::serializeExpression(llvm::raw_ostream &os,
                                          mlir::smt::SMTContext &ctx) {
   auto funcTy = FunctionType::get(getContext(), getOperandTypes(), {getType()});
-  std::string funcName =
-      "comb.add_" +
-      std::to_string((uint64_t)funcTy.getTypeID().getAsOpaquePointer());
+  std::string funcName = "comb.add_" + std::to_string(getType().getWidth());
   if (failed(ctx.addFunc(funcName, funcTy, "(+ arg0 arg1)")))
     return failure();
   os << "(" << funcName;
@@ -37,10 +35,8 @@ LogicalResult MulOp::generateDefinitions(mlir::smt::SMTContext &ctx) {
 LogicalResult MulOp::serializeExpression(llvm::raw_ostream &os,
                                          mlir::smt::SMTContext &ctx) {
   auto funcTy = FunctionType::get(getContext(), getOperandTypes(), {getType()});
-  std::string funcName =
-      "comb.add_" +
-      std::to_string((uint64_t)funcTy.getTypeID().getAsOpaquePointer());
-  if (failed(ctx.addFunc(funcName, funcTy, "(+ arg0 arg1)")))
+  std::string funcName = "comb.mul_" + std::to_string(getType().getWidth());
+  if (failed(ctx.addFunc(funcName, funcTy, "(* arg0 arg1)")))
     return failure();
   os << "(" << funcName;
   for (unsigned i : {0, 1}) {
@@ -74,8 +70,9 @@ LogicalResult ICmpOp::serializeExpression(llvm::raw_ostream &os,
     os << "(< ";
     break;
   default:
-    emitError("[mlir-to-smt] Unsigned comparisons not supported (because I "
-              "haven't yet figured out how to compare bitvectors).");
+    return emitError(
+        "[mlir-to-smt] Unsigned comparisons not supported (because I haven't "
+        "yet figured out how to compare bitvectors).");
   }
   if (failed(ctx.serializeExpression(lhs(), os)))
     return failure();
