@@ -11,12 +11,19 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include "circt/InitAllDialects.h"
 #include "circt/InitAllTranslations.h"
 #include "mlir/Support/LogicalResult.h"
 #include "mlir/Translation.h"
 
+#include "Target/MLIRToSMT.h"
+
 int main(int argc, char **argv) {
   circt::registerAllTranslations();
+  mlir::registerMLIRToSMTTranslation([](mlir::DialectRegistry &registry) {
+    circt::registerAllDialects(registry);
+  });
+
   return mlir::failed(
       mlir::mlirTranslateMain(argc, argv, "CIRCT Translation Testing Tool"));
 }

@@ -21,6 +21,8 @@
 #include "mlir/Support/MlirOptMain.h"
 #include "mlir/Transforms/Passes.h"
 
+#include "SMT/SMTOps.h"
+
 // Defined in the test directory, no public header.
 namespace circt {
 namespace test {
@@ -36,6 +38,9 @@ int main(int argc, char **argv) {
   registry.insert<mlir::LLVM::LLVMDialect>();
   registry.insert<mlir::memref::MemRefDialect>();
   registry.insert<mlir::StandardOpsDialect>();
+
+  // Register SMT
+  registry.insert<mlir::smt::SMTDialect>();
 
   circt::registerAllDialects(registry);
   circt::registerAllPasses();

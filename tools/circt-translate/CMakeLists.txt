@@ -19,4 +19,5 @@ target_link_libraries(circt-translate
   MLIRIR
   MLIRStandard
   MLIRSupport
+  MLIRToSMTTranslation
   )
